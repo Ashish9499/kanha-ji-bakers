@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BakeJoy Bakery Design System
+   Warm, playful, artisan bakery aesthetic
+   Colors: Peach, Cream, Mint, Dark Teal
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Cream/Peach Background Palette */
+    --background: 30 50% 98%;
+    --foreground: 175 45% 20%;
+
+    /* Card surfaces - soft cream */
+    --card: 30 60% 97%;
+    --card-foreground: 175 45% 20%;
+
+    --popover: 30 60% 97%;
+    --popover-foreground: 175 45% 20%;
+
+    /* Primary - Dark Teal */
+    --primary: 172 52% 22%;
+    --primary-foreground: 30 50% 98%;
+
+    /* Secondary - Soft Peach */
+    --secondary: 25 80% 92%;
+    --secondary-foreground: 175 45% 20%;
+
+    /* Muted - Light Cream */
+    --muted: 30 40% 94%;
+    --muted-foreground: 175 30% 40%;
+
+    /* Accent - Coral/Terracotta */
+    --accent: 15 75% 55%;
+    --accent-foreground: 30 50% 98%;
+
+    /* Mint Green */
+    --mint: 150 35% 92%;
+    --mint-foreground: 175 45% 20%;
+
+    /* Warm Peach for sections */
+    --peach: 25 85% 94%;
+    --peach-dark: 20 70% 88%;
+
+    /* Coral for highlights */
+    --coral: 15 75% 55%;
+    --coral-light: 15 80% 65%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 30 50% 98%;
+
+    --border: 30 30% 88%;
+    --input: 30 30% 88%;
+    --ring: 172 52% 22%;
+
+    --radius: 1rem;
+
+    /* Sidebar - keeping for compatibility */
+    --sidebar-background: 30 50% 98%;
+    --sidebar-foreground: 175 45% 20%;
+    --sidebar-primary: 172 52% 22%;
+    --sidebar-primary-foreground: 30 50% 98%;
+    --sidebar-accent: 25 80% 92%;
+    --sidebar-accent-foreground: 175 45% 20%;
+    --sidebar-border: 30 30% 88%;
+    --sidebar-ring: 172 52% 22%;
+
+    /* Typography */
+    --font-display: 'Pacifico', cursive;
+    --font-body: 'Nunito', sans-serif;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(30 30% 70% / 0.3);
+    --shadow-card: 0 8px 30px -8px hsl(30 30% 60% / 0.25);
+    --shadow-elevated: 0 12px 40px -12px hsl(30 30% 50% / 0.3);
+  }
+
+  .dark {
+    --background: 175 30% 10%;
+    --foreground: 30 50% 95%;
+
+    --card: 175 25% 15%;
+    --card-foreground: 30 50% 95%;
+
+    --popover: 175 25% 15%;
+    --popover-foreground: 30 50% 95%;
+
+    --primary: 30 70% 75%;
+    --primary-foreground: 175 30% 10%;
+
+    --secondary: 175 20% 20%;
+    --secondary-foreground: 30 50% 95%;
+
+    --muted: 175 20% 18%;
+    --muted-foreground: 30 30% 70%;
+
+    --accent: 15 65% 55%;
+    --accent-foreground: 30 50% 98%;
+
+    --mint: 150 25% 20%;
+    --mint-foreground: 150 40% 85%;
+
+    --peach: 25 40% 20%;
+    --peach-dark: 20 35% 15%;
+
+    --coral: 15 65% 50%;
+    --coral-light: 15 70% 60%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 30 50% 95%;
+
+    --border: 175 20% 25%;
+    --input: 175 20% 25%;
+    --ring: 30 70% 75%;
+
+    --sidebar-background: 175 25% 12%;
+    --sidebar-foreground: 30 50% 95%;
+    --sidebar-primary: 30 70% 75%;
+    --sidebar-primary-foreground: 175 30% 10%;
+    --sidebar-accent: 175 20% 20%;
+    --sidebar-accent-foreground: 30 50% 95%;
+    --sidebar-border: 175 20% 25%;
+    --sidebar-ring: 30 70% 75%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-body);
+    @apply font-bold;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Wavy Section Divider */
+  .wave-divider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+  }
+
+  /* Sparkle Animation */
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(0.8) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) rotate(180deg);
+    }
+  }
+
+  .sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  .sparkle-delay-1 {
+    animation-delay: 0.5s;
+  }
+
+  .sparkle-delay-2 {
+    animation-delay: 1s;
+  }
+
+  .sparkle-delay-3 {
+    animation-delay: 1.5s;
+  }
+
+  /* Float Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .float-delay-1 {
+    animation-delay: 0.5s;
+  }
+
+  .float-delay-2 {
+    animation-delay: 1s;
+  }
+
+  /* Testimonial Card Styles */
+  .testimonial-card {
+    @apply bg-card rounded-2xl p-4 shadow-lg border border-border/50;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Feature Badge */
+  .feature-badge {
+    @apply px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300;
+  }
+
+  .feature-badge-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .feature-badge-outline {
+    @apply bg-background border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+
+  /* Product Card */
+  .product-card {
+    @apply bg-card rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .product-card:hover {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Step Number Badge */
+  .step-number {
+    @apply w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Blog Card */
+  .blog-card {
+    @apply bg-card rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .blog-card:hover {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* WhatsApp Button */
+  .whatsapp-btn {
+    @apply inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-[#20BD5A] hover:scale-105;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  }
+
+  /* Primary Button with Glow */
+  .btn-primary-glow {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105;
+    box-shadow: 0 4px 20px hsl(var(--primary) / 0.4);
+  }
+
+  .btn-primary-glow:hover {
+    box-shadow: 0 6px 30px hsl(var(--primary) / 0.5);
+  }
+
+  /* Section with Peach Background */
+  .section-peach {
+    @apply bg-peach;
+    background: linear-gradient(180deg, hsl(var(--peach)) 0%, hsl(var(--peach-dark)) 100%);
+  }
+
+  /* Section with Mint Background */
+  .section-mint {
+    @apply bg-mint;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
