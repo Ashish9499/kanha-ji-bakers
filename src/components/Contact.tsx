@@ -6,22 +6,22 @@ import { Textarea } from "@/components/ui/textarea";
 const contactInfo = [{
   icon: Phone,
   label: "Phone",
-  value: "+1 (234) 567-890",
-  href: "tel:+1234567890"
+  value: "09728855586",
+  href: "tel:+919728855586"
 }, {
   icon: MessageCircle,
   label: "WhatsApp",
-  value: "+1 (234) 567-890",
-  href: "https://wa.me/1234567890"
+  value: "09728855586",
+  href: "https://wa.me/9728855586"
 }, {
   icon: Mail,
   label: "Email",
-  value: "hello@bakejoy.com",
-  href: "mailto:hello@bakejoy.com"
+  value: "kanha@bakery.com",
+  href: "mailto:kanha@bakery.com"
 }, {
   icon: Clock,
   label: "Hours",
-  value: "Mon-Sat: 8AM - 8PM"
+  value: "Mon-Sun: 10AM - 10PM"
 }];
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -52,21 +52,20 @@ export const Contact = () => {
             <div className="flex items-start gap-3 mb-8">
               <MapPin className="w-6 h-6 text-coral flex-shrink-0 mt-1" />
               <div>
-                <p className="font-semibold text-foreground">Mohan Bakery</p>
+                <p className="font-semibold text-foreground">Kanha Bakery</p>
                 <p className="text-foreground/70">
-                  123 Sweet Street, Cake Town<br />
-                  New York, NY 10001
+                  Brahamkumari chowk, 424/C, Gobindnagar, Jagadhari Rd,<br />
+                  near The PALM Hotel, Ambala Cantt, Haryana 133001
                 </p>
               </div>
             </div>
 
             {/* Map */}
             <div className="rounded-2xl overflow-hidden shadow-card mb-8 aspect-video">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30596698663!2d-74.25987368715491!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1635959481000!5m2!1sen!2s" width="100%" height="100%" style={{
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.46492211853!2d76.85785457502192!3d30.337734204616194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fb7450cda2ac1%3A0x9e440bfd7c03780!2sKanha%20G%20Bakers!5e0!3m2!1sen!2sin!4v1769846041855!5m2!1sen!2sin" width="100%" height="100%" style={{
               border: 0
             }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="BakeJoy Bakery Location" />
             </div>
-
             {/* Contact Details */}
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map(item => <a key={item.label} href={item.href} target={item.href?.startsWith("http") ? "_blank" : undefined} rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined} className={`flex items-center gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50 transition-all duration-200 ${item.href ? "hover:bg-secondary hover:border-primary cursor-pointer" : ""}`}>

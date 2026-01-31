@@ -59,7 +59,7 @@ export const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h2 className="font-display text-3xl mb-4">Mohan Bakery</h2>
+            <h2 className="font-display text-3xl mb-4">Kanha Bakery</h2>
             <p className="text-primary-foreground/80 mb-6 max-w-xs">
               Bringing sweetness to every celebration. Handcrafted with love, 
               delivered with care.

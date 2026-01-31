@@ -75,7 +75,7 @@ export const HowToOrder = () => {
           {/* WhatsApp CTA */}
           <div className="text-center mt-12">
             <a
-              href="https://wa.me/1234567890"
+              href="https://wa.me/9728855586"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn inline-flex"

@@ -66,7 +66,7 @@ export const Hero = () => {
                 View Menu
               </Button>
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/9728855586"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="whatsapp-btn justify-center"
