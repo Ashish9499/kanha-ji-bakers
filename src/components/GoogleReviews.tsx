@@ -127,27 +127,22 @@ const reviews = [
 
 export const GoogleReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const reviewsPerView = 3;
   const maxIndex = reviews.length - reviewsPerView;
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, maxIndex]);
+  }, [maxIndex]);
 
   const handlePrev = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
   const handleNext = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
@@ -260,7 +255,6 @@ export const GoogleReviews = () => {
             <button
               key={i}
               onClick={() => {
-                setIsAutoPlaying(false);
                 setCurrentIndex(i * reviewsPerView > maxIndex ? maxIndex : i * reviewsPerView);
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${

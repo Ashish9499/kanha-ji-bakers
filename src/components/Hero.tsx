@@ -6,7 +6,7 @@ import heroCroissant from "@/assets/hero-croissant.jpg";
 
 const testimonials = [
   {
-    text: "BakeJoy made my daughter's birthday special with a cake that tasted as good as it looked!",
+    text: "Kanha Bakers made my daughter's birthday special with a cake that tasted as good as it looked!",
     author: "Sarah Johnson",
   },
   {
