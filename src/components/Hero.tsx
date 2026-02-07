@@ -1,8 +1,52 @@
+import { useState, useEffect, useRef } from "react";
 import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sparkle } from "./Sparkle";
 import { WaveDivider } from "./WaveDivider";
 import kanhaBakers from "@/assets/kanhaBakers.jpg";
+
+// Lazy load images
+const LazyImage = ({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={imgRef} className={`relative ${className}`}>
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`w-full h-full object-cover transition-opacity duration-700 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+      {!isLoaded && isInView && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-3xl" />
+      )}
+    </div>
+  );
+};
 
 const testimonials = [
   {
@@ -39,16 +83,14 @@ export const Hero = () => {
 
             {/* Hero Image on Mobile/Tablet - Centered with 3D effect */}
             <div className="lg:hidden relative mb-6 flex justify-center perspective-container">
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 card-3d">
-                <img
-                  src={kanhaBakers}
-                  alt="Delicious chocolate croissant"
-                  className="w-full h-full object-cover rounded-3xl shadow-elevated"
-                />
-                <Sparkle className="absolute -top-4 -right-4 sparkle" size={28} />
-                {/* Decorative ring */}
-                <div className="absolute -inset-3 rounded-[2rem] border-2 border-coral/30 -z-10 animate-pulse" />
-              </div>
+              <LazyImage
+                src={kanhaBakers}
+                alt="Delicious chocolate croissant"
+                className="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl shadow-elevated"
+              />
+              <Sparkle className="absolute -top-4 -right-4 sparkle" size={28} />
+              {/* Decorative ring */}
+              <div className="absolute -inset-3 rounded-[2rem] border-2 border-coral/30 -z-10 animate-pulse" />
             </div>
 
             {/* Main Heading */}
@@ -102,10 +144,10 @@ export const Hero = () => {
             <div className="relative">
               {/* Main Image with 3D effect */}
               <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] card-3d">
-                <img
+                <LazyImage
                   src={kanhaBakers}
                   alt="Delicious chocolate croissant"
-                  className="w-full h-full object-cover rounded-3xl shadow-elevated animate-scale-in"
+                  className="w-full h-full"
                 />
                 
                 {/* Decorative elements */}

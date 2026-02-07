@@ -1,6 +1,50 @@
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Award, Palette, Truck, DollarSign, Heart } from "lucide-react";
 import { Sparkle } from "./Sparkle";
 import { WaveDividerAlt } from "./WaveDivider";
+
+// Lazy load images
+const LazyImage = ({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={imgRef} className={`relative ${className}`}>
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`w-full h-full object-cover transition-opacity duration-500 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+      {!isLoaded && isInView && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-2xl" />
+      )}
+    </div>
+  );
+};
 
 // Import cake images
 import chocolateCake from "@/assets/product-chocolate-cake.jpg";
@@ -24,8 +68,31 @@ const cakeImages = [
 ];
 
 export const Features = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById('about');
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="relative bg-gradient-to-br from-peach via-secondary to-peach py-12 md:py-20 lg:py-28">
+    <section id="about" className={`relative bg-gradient-to-br from-peach via-secondary to-peach py-12 md:py-20 lg:py-28 transition-all duration-700 ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+    }`}>
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Text Content */}
@@ -79,16 +146,12 @@ export const Features = () => {
               <div className="relative glass rounded-3xl p-4 sm:p-6 border border-border/30">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   {cakeImages.map((cake, i) => (
-                    <div 
+                    <LazyImage 
                       key={i} 
+                      src={cake.src} 
+                      alt={cake.alt}
                       className="aspect-square rounded-2xl overflow-hidden shadow-lg card-3d"
-                    >
-                      <img 
-                        src={cake.src} 
-                        alt={cake.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    />
                   ))}
                 </div>
               </div>
@@ -99,16 +162,12 @@ export const Features = () => {
               <div className="relative glass rounded-3xl p-6 sm:p-8 border border-border/30 perspective-container">
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   {cakeImages.map((cake, i) => (
-                    <div 
+                    <LazyImage 
                       key={i} 
+                      src={cake.src} 
+                      alt={cake.alt}
                       className="aspect-square rounded-2xl overflow-hidden shadow-lg card-3d"
-                    >
-                      <img 
-                        src={cake.src} 
-                        alt={cake.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    />
                   ))}
                 </div>
               </div>
