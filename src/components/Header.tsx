@@ -29,7 +29,7 @@ export const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between h-14 md:h-20">
+        <nav className="flex items-center justify-between h-14 md:h-20 mb-4 md:mb-10">
           {/* Premium Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative">

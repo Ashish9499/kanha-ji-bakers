@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { MessageCircle, ExternalLink, Loader2 } from "lucide-react";
+import { MessageCircle, ExternalLink, Loader2, X } from "lucide-react";
 import { WaveDivider } from "./WaveDivider";
 import { useProducts, Product } from "@/hooks/useProducts";
+import { Sparkle } from "./Sparkle";
 
 // Import fallback product images
 import chocolateCake from "@/assets/product-chocolate-cake.jpg";
@@ -26,6 +27,8 @@ type Category = (typeof categories)[number];
 
 export const Products = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { products, isLoading, error } = useProducts();
 
   const getProductImage = (product: Product, index: number): string => {
@@ -49,12 +52,25 @@ export const Products = () => {
     window.open(`https://wa.me/7206779411?text=${message}`, "_blank");
   };
 
+  const openProductModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+    document.body.style.overflow = 'unset';
+  };
+
   const filteredProducts = activeCategory === "All" 
     ? products 
     : products.filter(product => product.category === activeCategory);
 
   return (
-    <section id="products" className="relative bg-background py-16 md:py-28">
+    <>
+      <section id="products" className="relative bg-background py-16 md:py-28">
       <div className="container mx-auto px-4">
 
         {/* WhatsApp Order Notice - Mobile optimized */}
@@ -144,7 +160,10 @@ export const Products = () => {
                       </button>
                     </div>
 
-                    <button className="mt-3 md:mt-4 flex items-center gap-1 text-primary font-semibold text-xs md:text-sm hover:gap-2 transition-all duration-200">
+                    <button 
+                      onClick={() => openProductModal(product)}
+                      className="mt-3 md:mt-4 flex items-center gap-1 text-primary font-semibold text-xs md:text-sm hover:gap-2 transition-all duration-200"
+                    >
                       More Details
                       <ExternalLink size={12} className="md:w-3.5 md:h-3.5" />
                     </button>
@@ -165,6 +184,114 @@ export const Products = () => {
       {/* Wave Divider */}
       <WaveDivider fillColor="hsl(var(--peach))" className="absolute bottom-0 left-0 right-0" />
     </section>
+
+    {/* Product Detail Modal */}
+    {isModalOpen && selectedProduct && (
+      <div 
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        onClick={closeModal}
+      >
+        {/* Backdrop with blur */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" />
+        
+        {/* Modal Content */}
+        <div 
+          className="relative bg-gradient-to-br from-peach via-secondary to-peach rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-border/30 transform transition-all duration-300 scale-100 animate-fade-in"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Decorative Elements */}
+          <div className="absolute -top-6 -right-6 z-10">
+            <Sparkle className="sparkle" size={24} />
+          </div>
+          <div className="absolute -bottom-4 -left-4 z-10">
+            <Sparkle className="sparkle sparkle-delay-1" size={18} />
+          </div>
+          
+          {/* Close Button */}
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background hover:scale-110 transition-all duration-200 border border-border/30"
+            aria-label="Close modal"
+          >
+            <X size={20} />
+          </button>
+          
+          {/* Modal Content */}
+          <div className="p-6 md:p-8">
+            {/* Product Image */}
+            <div className="relative mb-6 md:mb-8">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={getProductImage(selectedProduct, 0)}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Decorative ring */}
+              <div className="absolute -inset-4 rounded-[2.5rem] border-2 border-dashed border-coral/20 -z-10 animate-pulse" />
+            </div>
+            
+            {/* Product Info */}
+            <div className="text-center space-y-4">
+              <h2 className="font-display text-2xl md:text-4xl text-primary">
+                {selectedProduct.name}
+              </h2>
+              
+              <div className="flex items-center justify-center gap-4">
+                <span className="text-coral font-bold text-xl md:text-2xl">
+                  ${selectedProduct.price}
+                </span>
+                <span className="text-foreground/60 font-medium">
+                  {selectedProduct.category}
+                </span>
+              </div>
+              
+              {/* Weight/Size Info */}
+              <div className="flex items-center justify-center gap-2 text-foreground/70">
+                <div className="w-2 h-2 bg-coral rounded-full"></div>
+                <span className="text-sm md:text-base">
+                  Premium Quality • Freshly Made
+                </span>
+                <div className="w-2 h-2 bg-coral rounded-full"></div>
+              </div>
+              
+              {/* Description */}
+              {selectedProduct.description && (
+                <p className="text-foreground/80 text-sm md:text-base leading-relaxed max-w-md mx-auto">
+                  {selectedProduct.description}
+                </p>
+              )}
+              
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+                <button
+                  onClick={() => {
+                    handleWhatsAppOrder(
+                      selectedProduct.name, 
+                      getProductImage(selectedProduct, 0), 
+                      selectedProduct.price
+                    );
+                    closeModal();
+                  }}
+                  className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl hover:bg-[#20BD5A] active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl touch-target"
+                >
+                  <MessageCircle size={20} />
+                  Order on WhatsApp
+                </button>
+                
+                <button
+                  onClick={closeModal}
+                  className="px-6 py-3 rounded-xl bg-background/80 backdrop-blur-sm border border-border/30 text-foreground hover:bg-background hover:scale-105 active:scale-95 transition-all duration-200 touch-target"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </>
   );
 };
 
