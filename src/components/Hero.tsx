@@ -61,7 +61,7 @@ const testimonials = [
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-mint overflow-hidden pt-20 safe-top">
+    <section className="relative min-h-screen bg-mint overflow-hidden safe-top">
       {/* Sparkle Decorations */}
       <Sparkle className="absolute top-32 right-[15%] sparkle hidden md:block" size={24} />
       <Sparkle className="absolute top-48 right-[25%] sparkle sparkle-delay-1 hidden md:block" size={18} />
