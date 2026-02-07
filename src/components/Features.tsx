@@ -27,13 +27,13 @@ export const Features = () => {
   return (
     <section id="about" className="relative section-peach py-12 md:py-20 lg:py-28">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="relative order-2 lg:order-1 px-2">
+          <div className="relative order-2 lg:order-1 px-1 sm:px-2">
             <Sparkle className="absolute -top-6 -left-2 sparkle hidden md:block" size={18} />
             <Sparkle className="absolute top-12 right-0 sparkle sparkle-delay-1 hidden md:block" size={14} />
             
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary mb-4 md:mb-6 text-center lg:text-left">
+            <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl text-primary mb-3 sm:mb-4 md:mb-6 text-center lg:text-left">
               Best Choice for{" "}
               <span className="text-coral relative inline-block">
                 Every Occasion
@@ -43,27 +43,27 @@ export const Features = () => {
               </span>
             </h2>
             
-            <p className="text-foreground/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6 md:mb-8 text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+            <p className="text-foreground/70 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6 md:mb-8 text-center lg:text-left max-w-md sm:max-w-lg mx-auto lg:mx-0">
               At Kanha Bakery, we turn simple ingredients into delectable works of 
               edible art. Satisfy your cravings with our irresistible pastries and 
               baked goods, delivered fresh from oven for you truly.
             </p>
 
-            {/* Feature Badges - Mobile optimized */}
-            <div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start">
-              <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-background border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 touch-target active:scale-95">
-                <span className="text-sm md:text-base">+</span>
+            {/* Feature Badges - Mobile first approach */}
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 justify-center lg:justify-start">
+              <button className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-background border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 touch-target active:scale-95">
+                <span className="text-xs sm:text-sm md:text-base">+</span>
               </button>
               {features.map((feature) => (
                 <span
                   key={feature.label}
-                  className={`feature-badge text-xs md:text-sm px-3 py-1.5 md:px-4 md:py-2 ${
+                  className={`feature-badge text-xs px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 ${
                     feature.variant === "primary" 
                       ? "feature-badge-primary" 
                       : "feature-badge-outline"
                   }`}
                 >
-                  {feature.label}
+                  <span className="truncate max-w-20 sm:max-w-none">{feature.label}</span>
                 </span>
               ))}
             </div>
@@ -92,13 +92,13 @@ export const Features = () => {
               </div>
             </div>
 
-            {/* Mobile Horizontal Scroll - Enhanced */}
-            <div className="lg:hidden -mx-4 px-4">
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-3 snap-x-mandatory">
+            {/* Mobile Horizontal Scroll - Fixed overflow */}
+            <div className="lg:hidden -mx-2 sm:-mx-4 px-2 sm:px-4">
+              <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x-mandatory">
                 {cakeImages.map((cake, i) => (
                   <div 
                     key={i} 
-                    className="flex-shrink-0 w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden shadow-lg snap-center touch-target active:scale-95 transition-transform"
+                    className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden shadow-lg snap-center touch-target active:scale-95 transition-transform"
                   >
                     <img 
                       src={cake.src} 
@@ -109,11 +109,11 @@ export const Features = () => {
                 ))}
               </div>
               {/* Enhanced Swipe indicator */}
-              <div className="flex items-center justify-center gap-1.5 mt-3">
-                <div className="w-6 h-1.5 rounded-full bg-coral" />
-                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
-                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
-                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
+              <div className="flex items-center justify-center gap-1 mt-2">
+                <div className="w-4 h-1 rounded-full bg-coral" />
+                <div className="w-1 h-1 rounded-full bg-coral/40" />
+                <div className="w-1 h-1 rounded-full bg-coral/40" />
+                <div className="w-1 h-1 rounded-full bg-coral/40" />
               </div>
             </div>
           </div>

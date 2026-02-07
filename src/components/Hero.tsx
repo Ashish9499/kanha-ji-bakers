@@ -2,7 +2,7 @@ import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sparkle } from "./Sparkle";
 import { WaveDivider } from "./WaveDivider";
-import heroCroissant from "@/assets/hero-croissant.jpg";
+import kanhaBakers from "@/assets/kanhaBakers.jpg";
 
 const testimonials = [
   {
@@ -41,7 +41,7 @@ export const Hero = () => {
             <div className="lg:hidden relative mb-6 flex justify-center perspective-container">
               <div className="relative w-64 h-64 sm:w-72 sm:h-72 card-3d">
                 <img
-                  src={heroCroissant}
+                  src={kanhaBakers}
                   alt="Delicious chocolate croissant"
                   className="w-full h-full object-cover rounded-3xl shadow-elevated"
                 />
@@ -103,7 +103,7 @@ export const Hero = () => {
               {/* Main Image with 3D effect */}
               <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] card-3d">
                 <img
-                  src={heroCroissant}
+                  src={kanhaBakers}
                   alt="Delicious chocolate croissant"
                   className="w-full h-full object-cover rounded-3xl shadow-elevated animate-scale-in"
                 />
