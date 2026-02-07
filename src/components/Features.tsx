@@ -25,15 +25,15 @@ const cakeImages = [
 
 export const Features = () => {
   return (
-    <section id="about" className="relative section-peach py-12 md:py-20 lg:py-28">
+    <section id="about" className="relative bg-gradient-to-br from-peach via-secondary to-peach py-12 md:py-20 lg:py-28">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="relative order-2 lg:order-1 px-1 sm:px-2">
+          <div className="relative order-2 lg:order-1 px-2 sm:px-4">
             <Sparkle className="absolute -top-6 -left-2 sparkle hidden md:block" size={18} />
             <Sparkle className="absolute top-12 right-0 sparkle sparkle-delay-1 hidden md:block" size={14} />
             
-            <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl text-primary mb-3 sm:mb-4 md:mb-6 text-center lg:text-left">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary mb-4 sm:mb-6 md:mb-8 text-center lg:text-left">
               Best Choice for{" "}
               <span className="text-coral relative inline-block">
                 Every Occasion
@@ -43,39 +43,41 @@ export const Features = () => {
               </span>
             </h2>
             
-            <p className="text-foreground/70 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6 md:mb-8 text-center lg:text-left max-w-md sm:max-w-lg mx-auto lg:mx-0">
+            <p className="text-foreground/80 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 md:mb-10 text-center lg:text-left max-w-md sm:max-w-lg mx-auto lg:mx-0">
               At Kanha Bakery, we turn simple ingredients into delectable works of 
               edible art. Satisfy your cravings with our irresistible pastries and 
               baked goods, delivered fresh from oven for you truly.
             </p>
 
-            {/* Feature Badges - Mobile first approach */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 justify-center lg:justify-start">
-              <button className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-background border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 touch-target active:scale-95">
-                <span className="text-xs sm:text-sm md:text-base">+</span>
+            {/* Feature Badges */}
+            <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center lg:justify-start">
+              <button className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-coral flex items-center justify-center text-white shadow-lg hover:scale-105 transition-all duration-300 touch-target active:scale-95">
+                <span className="text-sm sm:text-base md:text-lg font-bold">+</span>
               </button>
               {features.map((feature) => (
                 <span
                   key={feature.label}
-                  className={`feature-badge text-xs px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 ${
+                  className={`feature-badge text-xs sm:text-sm md:text-base px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 ${
                     feature.variant === "primary" 
                       ? "feature-badge-primary" 
                       : "feature-badge-outline"
                   }`}
                 >
-                  <span className="truncate max-w-20 sm:max-w-none">{feature.label}</span>
+                  <span className="truncate max-w-24 sm:max-w-none font-medium">{feature.label}</span>
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Decorative Image Area - Mobile horizontal scroll, desktop grid */}
+          {/* Image Area - Responsive Grid */}
           <div className="relative order-1 lg:order-2">
-            {/* Desktop Grid */}
-            <div className="hidden lg:block">
-              <div className="absolute inset-0 bg-gradient-to-br from-coral/20 to-primary/10 rounded-full blur-3xl" />
-              <div className="relative glass rounded-3xl p-6 border border-border/30 perspective-container">
-                <div className="grid grid-cols-2 gap-4">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-coral/15 to-primary/10 rounded-full blur-3xl animate-pulse"></div>
+            
+            {/* Mobile Grid - 2x2 */}
+            <div className="lg:hidden">
+              <div className="relative glass rounded-3xl p-4 sm:p-6 border border-border/30">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   {cakeImages.map((cake, i) => (
                     <div 
                       key={i} 
@@ -92,28 +94,23 @@ export const Features = () => {
               </div>
             </div>
 
-            {/* Mobile Horizontal Scroll - Fixed overflow */}
-            <div className="lg:hidden -mx-2 sm:-mx-4 px-2 sm:px-4">
-              <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x-mandatory">
-                {cakeImages.map((cake, i) => (
-                  <div 
-                    key={i} 
-                    className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden shadow-lg snap-center touch-target active:scale-95 transition-transform"
-                  >
-                    <img 
-                      src={cake.src} 
-                      alt={cake.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              {/* Enhanced Swipe indicator */}
-              <div className="flex items-center justify-center gap-1 mt-2">
-                <div className="w-4 h-1 rounded-full bg-coral" />
-                <div className="w-1 h-1 rounded-full bg-coral/40" />
-                <div className="w-1 h-1 rounded-full bg-coral/40" />
-                <div className="w-1 h-1 rounded-full bg-coral/40" />
+            {/* Desktop Grid */}
+            <div className="hidden lg:block">
+              <div className="relative glass rounded-3xl p-6 sm:p-8 border border-border/30 perspective-container">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  {cakeImages.map((cake, i) => (
+                    <div 
+                      key={i} 
+                      className="aspect-square rounded-2xl overflow-hidden shadow-lg card-3d"
+                    >
+                      <img 
+                        src={cake.src} 
+                        alt={cake.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

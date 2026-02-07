@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Cake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -24,17 +24,26 @@ export const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-top ${
         isScrolled 
-          ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
+          ? "bg-transparent backdrop-blur-sm border-b border-border/10" 
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-14 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="font-display text-xl md:text-3xl text-primary">
-              Kanha Bakery
-            </span>
+          {/* Premium Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-coral to-accent rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                <Cake size={24} className="text-white" />
+              </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-coral/20 to-accent/20 rounded-xl blur-md animate-pulse"></div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display text-2xl md:text-4xl font-black bg-gradient-to-r from-primary via-coral to-accent bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
+                Kanha Bakery
+              </span>
+              <span className="text-xs md:text-sm text-coral font-medium opacity-80">Premium Cakes & Pastries</span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
