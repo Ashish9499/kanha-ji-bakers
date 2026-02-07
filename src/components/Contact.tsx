@@ -39,8 +39,23 @@ export const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll get back to you soon.");
+    
+    // Format the message for WhatsApp
+    const whatsappMessage = encodeURIComponent(
+      `🎂 *New Order Inquiry*\n\n` +
+      `👤 *Name:* ${formData.name}\n` +
+      `📞 *Phone:* ${formData.phone}\n` +
+      `💬 *Message:* ${formData.message}\n\n` +
+      `📝 *Sent from Kanha Bakery Website*`
+    );
+    
+    // Send to WhatsApp number 7206779411
+    const whatsappUrl = `https://wa.me/7206779411?text=${whatsappMessage}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form
     setFormData({ name: "", phone: "", message: "" });
   };
 

@@ -14,7 +14,7 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/kanhabakers2021?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
   { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
   { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
 ];
