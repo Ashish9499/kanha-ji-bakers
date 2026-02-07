@@ -126,7 +126,7 @@ export const Hero = () => {
             </div>
 
             {/* Product Highlight - Improved for mobile */}
-            <div className="mt-6 flex items-center gap-3 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.6s" }}>
+            {/* <div className="mt-6 flex items-center gap-3 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.6s" }}>
               <div className="flex items-center gap-2 text-foreground/60 bg-background/50 rounded-full px-4 py-2 backdrop-blur-sm">
                 <button className="touch-target flex items-center justify-center hover:text-primary transition-colors">
                   <ChevronLeft size={20} />
@@ -136,7 +136,7 @@ export const Hero = () => {
                   <ChevronRight size={20} />
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Content - Hero Image Desktop with 3D */}
